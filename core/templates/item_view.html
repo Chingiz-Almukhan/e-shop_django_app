@@ -29,12 +29,11 @@
                                         <input class="btn btn-outline-dark mt-2" type="submit"
                                                value="Добавить в корзину">
                                     </form>
-                                    <form action="{% url 'buy' item.pk %}" method="POST">
-                                        {% csrf_token %}
-                                        <button type="submit" id="checkout-button" class="btn mt-1 btn-primary">Купить
-                                            сразу
-                                        </button>
-                                    </form>
+
+                                    <button type="submit" id="checkout-button" class="btn mt-1 btn-primary">Купить
+                                        сразу
+                                    </button>
+
                                 </div>
 
 
@@ -45,5 +44,21 @@
             </div>
         </div>
     </div>
+    <script>
+        const buy_button = document.querySelector('#checkout-button')
+        buy_button.addEventListener('click', event => {
+            fetch('{% url 'buy' item.pk %}')
+                .then((result) => {
+                    return result.json()
+                })
+                .then((data) => {
+                    var stripe = Stripe(data.stripe_public_key);
+                    stripe.redirectToCheckout({
+                        sessionId: data.session_id
+                    }).then(function (result) {
+                    });
+                })
+        })
+    </script>
 
 {% endblock %}

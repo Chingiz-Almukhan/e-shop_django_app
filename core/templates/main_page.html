@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Main {% endblock %}
 {% block content %}
-    <div class="container px-4 px-lg-5 mt-5">
+    <div id='main' class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for item in items %}
                 <div class="col mb-5">
@@ -28,9 +28,45 @@
                 </div>
             {% endfor %}
         </div>
+        {% if extra_data %}
+            <button id='myModalButton' type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                Launch demo modal
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" id="closeButton" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            {{ extra_data }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                let modalButton = document.getElementById('myModalButton');
+                let modalWindow = document.getElementById('exampleModal');
+                let modalCloseButton = document.getElementById('closeButton');
+                modalButton.click();
+                modalButton.hidden = true
+                setInterval(function () {
+                    modalCloseButton.click();
+                }, 5000);
+                setInterval(function () {
+                    modalButton.remove();
+                    modalWindow.remove();
+                }, 7000);
+
+            </script>
+        {% endif %}
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
+
     </div>
 
 {% endblock %}

@@ -52,10 +52,7 @@
                                             <h5 class="text-uppercase">Итого</h5>
                                             <h5>{{ total }} </h5>
                                         </div>
-                                        <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2"
-                                              action="" method="POST">
-                                            {% include 'partial/add_edit.html' with button_text='Оформить заказ' %}
-                                        </form>
+                                        <button id="buyButton" class="btn btn-warning">Оформить заказ</button>
                                     </div>
                                 </div>
                             </div>
@@ -65,5 +62,21 @@
             </div>
         </div>
     </section>
+    <script>
+    const buy_button = document.querySelector('#buyButton')
+        buy_button.addEventListener('click', event => {
+            fetch('{% url 'order' %}')
+                .then((result) => {
+                    return result.json()
+                })
+                .then((data) => {
+                    var stripe = Stripe(data.stripe_public_key);
+                    stripe.redirectToCheckout({
+                        sessionId: data.session_id
+                    }).then(function (result) {
+                    });
+                })
+        })
+    </script>
 
 {% endblock %}
