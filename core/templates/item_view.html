@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %} {{ item.name }} {% endblock %}
+{% block content %}
+    <div class="container mt-5 mb-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="images p-3">
+                                <div class="text-center p-4"><img id="main-image"
+                                                                  src="https://asialedspartnership.org/default/image/default-image.jpg"
+                                                                  width="250"
+                                                                  alt="img"/></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product p-4">
+                                <div class="mt-4 mb-3">
+                                    <h1>{{ item.name }}</h1>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <span class="h4">Цена: {{ item.price }}</span>
+                                    </div>
+                                </div>
+                                <p class="about">Описание: <br>{{ item.description }}</p>
+
+                                <div class="cart mt-4 align-items-center">
+                                    <form method="post" action="{% url 'add_to_cart' item.pk %}">{% csrf_token %}
+                                        <input class="btn btn-outline-dark mt-2" type="submit"
+                                               value="Добавить в корзину">
+                                    </form>
+                                    <form action="{% url 'buy' item.pk %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" id="checkout-button" class="btn mt-1 btn-primary">Купить
+                                            сразу
+                                        </button>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
