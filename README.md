@@ -8,7 +8,7 @@
 # Настройка проекта:
 ## Для начала делаем клон ветки:
 
- 	 $ git clone git@github.com:Chingiz-Almukhan/e-shop_django_app.git
+ 	 $ git clone https://github.com/Chingiz-Almukhan/e-shop_django_app.git
   
 ## После переходим в деректорию проекта:
 
