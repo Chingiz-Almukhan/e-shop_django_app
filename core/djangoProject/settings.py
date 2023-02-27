@@ -113,6 +113,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = '/var/www/china/static'
+
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51MecmbLXGW3boBp7GHlqlRCiIFXtK4yn5QznOmmbJCDtl4yE9dObaAAfTi7phqrYCfIOCPIynETuX5E9nBxALIBx00QpM9iOp6'
 STRIPE_SECRET_KEY = 'sk_test_51MecmbLXGW3boBp7WVCU5QxQBBuTulANbsJDkCk7lZGPlsEueFfi58CO7KHsbrxB0KrUzqcvv8wtjTMz4wgzPePz00RLQu19Za'
 
